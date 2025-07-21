@@ -16,7 +16,7 @@
 
 @layer base {
   body {
-    @apply bg-primary font-dm-sans;
+    @apply bg-primary font-dm-sans text-white;
     font-optical-sizing: auto;
   }
 }
@@ -28,6 +28,10 @@
 
   .wrapper {
     @apply px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10;
+  }
+
+  header h1 {
+    @apply text-5xl text-center font-bold text-gradient;
   }
 
   .trending {
