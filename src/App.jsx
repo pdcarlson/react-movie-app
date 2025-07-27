@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Search from './components/Search.jsx'
 import Spinner from './components/Spinner.jsx'
+import MovieCard from './components/MovieCard.jsx';
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
@@ -78,7 +79,7 @@ const App = () => {
           ) : (
             <ul>
               {moviesList.map((movie) => (
-                <p key={movie.id} className='text-white'>{movie.title}</p>
+                <MovieCard key={movie.id} movie={movie} />
               ))}
             </ul>
           )}
