@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
-import Search from './components/Search.jsx'
-import Spinner from './components/Spinner.jsx'
+import Search from './components/Search.jsx';
+import Spinner from './components/Spinner.jsx';
 import MovieCard from './components/MovieCard.jsx';
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
-
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-
 const API_OPTIONS = {
   method: 'GET',
   headers: {
@@ -17,24 +15,24 @@ const API_OPTIONS = {
 };
 
 const App = () => {
-  // state variables
   const [searchTerm, setSearchTerm] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [moviesList, setMoviesList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [debouncedSeachTerm, setDebouncedSearchTerm] = useDebounce();
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
 
-  useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm])
+  useDebounce(() => {
+    setDebouncedSearchTerm(searchTerm);
+  }, 500, [searchTerm]);
 
-  // fetch movies from the TMDB API
   const fetchMovies = async (query = '') => {
     setIsLoading(true);
     setErrorMessage('');
 
     try {
-      const endpoint = query 
+      const endpoint = query
       ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
-      : `${API_BASE_URL}/discovnper/movie?sort_by=popularity.desc`;
+      : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
       const response = await fetch(endpoint, API_OPTIONS);
 
       if (!response.ok) {
@@ -44,14 +42,12 @@ const App = () => {
       const data = await response.json();
       console.log("Fetched movies:", data);
 
-      // handle situation where results are empty or false
       if (data.results === false) {
-        setErrorMessage(data.error || "Failed to fetch movies.");
+        setErrorMessage(data.Error || "Failed to fetch movies.");
         setMoviesList([]);
         return;
       }
       
-      // set movies list if results are found
       setMoviesList(data.results || []);
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -62,13 +58,13 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchMovies(debouncedSeachTerm);
-  }, [debouncedSeachTerm]);
+    fetchMovies(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
   
   return (
     <main>
       <div className='pattern' />
-      <div className='wrapper'>``
+      <div className='wrapper'>
         <header>
           <img src='./hero.png' alt='Hero Banner' />
 
@@ -94,4 +90,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
