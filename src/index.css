@@ -40,7 +40,7 @@
   }
 
   header {
-    @apply sm:mt-10 mt-5;
+    @apply mt-[-10px];
   }
 
   header img {
