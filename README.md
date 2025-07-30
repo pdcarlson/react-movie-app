@@ -4,13 +4,9 @@ A responsive movie discovery web application built with React that allows users 
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue)](https://movies.pdcarlson.dev)
 
-![Movie App Homepage](screenshots/homepage.png)
-
 ## Overview
 
 This project was created as part of my learning journey to practice modern React development techniques and showcase my coding abilities. It features a clean, responsive interface for discovering and exploring movies with a focus on user experience.
-
-![Trending Movies Section](screenshots/trending-section.png)
 
 ## Key Features
 
